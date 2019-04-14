@@ -120,7 +120,7 @@ Toolkit.run( async ( tools ) => {
 
     // Log success message
     tools.log.success(
-      `Moved newly assigned pull request ${ pullrequest.title } to ${ column.name }.`
+      `Moved newly assigned pull request ${ pullrequest.title } to ${ columnName }.`
     );
   }
   catch( error ){
