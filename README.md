@@ -1,6 +1,6 @@
 # Move assinged pull request to column
 
-> ✨ GitHub action to automagically move assinged pull request to a column.
+> ✨ GitHub action to automagically move assigned pull request to a column.
 
 
 ## How to use
@@ -9,7 +9,7 @@ To use this action we need the project name and the name of the column for the n
 
 In your project create a new workflow file `.github/main.workflow`:
 ```
-workflow "✨ Move assinged pull request to column" {
+workflow "✨ Move assigned pull request to column" {
   resolves = ["Move assigned pull request to column"]
   on = "pull_requests"
 }
