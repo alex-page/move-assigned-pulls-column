@@ -127,6 +127,6 @@ Toolkit.run( async ( tools ) => {
     tools.exit.failure( error );
   }
 }, {
-  event: [ 'pull_request.assigned' ],
+  event: [ 'pull_request.assigned', 'check_run' ],
   secrets: [ 'GITHUB_TOKEN' ],
 })
