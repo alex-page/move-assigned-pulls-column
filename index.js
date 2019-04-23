@@ -3,22 +3,24 @@ const { Toolkit } = require( 'actions-toolkit' );
 
 Toolkit.run( async ( tools ) => {
   try {
+    const { action, pull_request } = tools.context.payload;
+    if( action !== 'assigned' ){
+      tools.exit.neutral( `Event ${ action } is not supported by this action.` )
+    }
+
     // Get the arguments
     const projectName = tools.arguments._[ 0 ];
     const columnName  = tools.arguments._[ 1 ];
 
-    // Get the data from the event
-    const pullrequest = tools.context.payload.pull_request;
-
     // Check if there are existing asignees
-    if( pullrequest.assignee && pullrequest.assignee.length ) {
-      const assigneeLogins = pullrequest.assignee.map( data => data.login ).join( ', ' );
-      tools.exit.neutral( `${ assigneeLogins } are already assigned. Leaving ${ pullrequest.title } in current column.` );
+    if( pull_request.assignee && pull_request.assignee.length ) {
+      const assigneeLogins = pull_request.assignee.map( data => data.login ).join( ', ' );
+      tools.exit.neutral( `${ assigneeLogins } are already assigned. Leaving ${ pull_request.title } in current column.` );
     }
 
     // Fetch the column ids and names
     const { resource } = await tools.github.graphql(`query {
-      resource( url: "${ pullrequest.html_url }" ) {
+      resource( url: "${ pull_request.html_url }" ) {
         ... on PullRequest {
           projectCards {
             nodes {
@@ -70,11 +72,11 @@ Toolkit.run( async ( tools ) => {
       || null;
 
     if( cardId === null || currentColumn === null ){
-      tools.exit.failure( `The pull request ${ pullrequest.title } is not in a project.` );
+      tools.exit.failure( `The pull request ${ pull_request.title } is not in a project.` );
     }
 
     if( currentColumn === columnName ){
-      tools.exit.neutral( `The pull request ${ pullrequest.title } is already in ${ columnName }.` );
+      tools.exit.neutral( `The pull request ${ pull_request.title } is already in ${ columnName }.` );
     }
 
     // Get an array of all matching projects
@@ -120,13 +122,13 @@ Toolkit.run( async ( tools ) => {
 
     // Log success message
     tools.log.success(
-      `Moved newly assigned pull request ${ pullrequest.title } to ${ columnName }.`
+      `Moved newly assigned pull request ${ pull_request.title } to ${ columnName }.`
     );
   }
   catch( error ){
     tools.exit.failure( error );
   }
 }, {
-  event: [ 'pull_request.assigned' ],
+  event: [ 'pull_request', 'check_run' ],
   secrets: [ 'GITHUB_TOKEN' ],
 })
