@@ -26,4 +26,5 @@ action "Move assigned pull request to column" {
 
 ## Release history
 
+- v0.0.2 - End in a neutral state for unsupported pull request action
 - v0.0.1 - First release

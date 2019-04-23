@@ -1,6 +1,6 @@
 {
   "name": "move-assigned-pulls-column",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "GitHub action to automagically move assigned pulls to a column.",
   "main": "index.js",
   "scripts": {
