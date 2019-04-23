@@ -13,9 +13,11 @@ FROM node:alpine
 # Labels for GitHub to read your action
 LABEL "com.github.actions.name"="Move assigned pull requests column"
 LABEL "com.github.actions.description"="✨ Magically move assigned pull requests to a column."
-
 LABEL "com.github.actions.icon"="move"
 LABEL "com.github.actions.color"="green"
+LABEL "repository"="https://github.com/alex-page/move-assigned-pulls-column"
+LABEL "homepage"="https://github.com/alex-page/move-assigned-pulls-column"
+LABEL "maintainer"="Alex Page <alex@alexpage.com.au>".
 
 # Copy the package.json and package-lock.json
 COPY package*.json ./
