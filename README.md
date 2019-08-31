@@ -1,3 +1,28 @@
+# ‼️This is no longer supported ‼️
+
+Please use [`GitHub Project Automation+`](https://github.com/marketplace/actions/github-project-automation) instead. The following snippet adds or moves all assigned pull requests to a project column using GitHub Project Automation+:
+
+```yml
+name: Automate project columns
+
+on: [pull_request]
+
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move assigned pull requests into To do
+        if: github.event_name == 'pull_request' && github.event.action == 'assigned'
+        uses: alex-page/automate-project-columns@master
+        with:
+          project: Backlog
+          column: To do
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+---
+
+
 # Move assinged pull request to column
 
 > ✨ GitHub action to automagically move assigned pull request to a column.
@@ -39,6 +64,7 @@ secrets = ["GH_PAT"]
 
 ## Release history
 
+- v0.0.6 - Deprecate
 - v0.0.5 - Fix incorrect documentation
 - v0.0.4 - Add optional personal access token for private repos
 - v0.0.3 - Add missing labels for action release
