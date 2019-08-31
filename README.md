@@ -25,7 +25,7 @@ jobs:
 
 # Move assinged pull request to column
 
-> ✨ GitHub action to automagically move assinged pull request to a column.
+> ✨ GitHub action to automagically move assigned pull request to a column.
 
 
 ## How to use
@@ -34,9 +34,9 @@ To use this action we need the project name and the name of the column for the n
 
 In your project create a new workflow file `.github/main.workflow`:
 ```
-workflow "✨ Move assinged pull request to column" {
+workflow "✨ Move assigned pull request to column" {
   resolves = ["Move assigned pull request to column"]
-  on = "pull_requests"
+  on = "pull_request"
 }
 
 action "Move assigned pull request to column" {
@@ -64,7 +64,8 @@ secrets = ["GH_PAT"]
 
 ## Release history
 
-- v0.0.5 - Deprecate
+- v0.0.6 - Deprecate
+- v0.0.5 - Fix incorrect documentation
 - v0.0.4 - Add optional personal access token for private repos
 - v0.0.3 - Add missing labels for action release
 - v0.0.2 - End in a neutral state for unsupported pull request action
